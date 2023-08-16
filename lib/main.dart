@@ -137,12 +137,25 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           FloatingActionButton(
             heroTag: "Undo",
-            onPressed: () {},
+            onPressed: () {
+              if (drawingPoints.isNotEmpty && historyDrawingPoints.isNotEmpty) {
+                setState(() {
+                  drawingPoints.removeLast();
+                });
+              }
+            },
             child: const Icon(Icons.undo),
           ),
           FloatingActionButton(
             heroTag: "Redo",
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                if (drawingPoints.length < historyDrawingPoints.length) {
+                  final index = drawingPoints.length;
+                  drawingPoints.add(historyDrawingPoints[index]);
+                }
+              });
+            },
             child: const Icon(Icons.redo),
           ),
         ],
