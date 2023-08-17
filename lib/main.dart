@@ -41,6 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
   var historyDrawingPoints = <DrawingPoint>[];
   var drawingPoints = <DrawingPoint>[];
   DrawingPoint? currentDrawingPoint;
+  var selectedColor = Colors.black;
+  var selectedWidth = 2.0;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   offsets: [
                     details.localPosition,
                   ],
+                  color: selectedColor,
+                  width: selectedWidth,
                 );
 
                 if (currentDrawingPoint == null) return;
@@ -107,12 +111,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
                 itemBuilder: (context, index) {
-                  return Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: availablecolors[index],
-                      shape: BoxShape.circle,
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedColor = availablecolors[index];
+                      });
+                    },
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: availablecolors[index],
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   );
                 },
