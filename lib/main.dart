@@ -124,6 +124,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: availablecolors[index],
                         shape: BoxShape.circle,
                       ),
+                      foregroundDecoration: BoxDecoration(
+                          border: selectedColor == availablecolors[index]
+                              ? Border.all(color: Colors.black, width: 4)
+                              : null,
+                          shape: BoxShape.circle),
                     ),
                   );
                 },
@@ -137,8 +142,14 @@ class _MyHomePageState extends State<MyHomePage> {
             child: RotatedBox(
               quarterTurns: 3,
               child: Slider(
-                value: 0.4,
-                onChanged: (value) {},
+                value: selectedWidth,
+                min: 1,
+                max: 20,
+                onChanged: (value) {
+                  setState(() {
+                    selectedWidth = value;
+                  });
+                },
               ),
             ),
           ),
